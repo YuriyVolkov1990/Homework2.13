@@ -8,6 +8,5 @@ public class Main {
         StringList m = new StringListImpl(5);
         m.add("dfs");
         System.out.println(Arrays.toString(m.toArray()));
-
     }
 }

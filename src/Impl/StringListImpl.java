@@ -4,7 +4,6 @@ import Interface.StringList;
 
 
 public class StringListImpl implements StringList {
-
     public static int size;
     public static String[] m;
     public StringListImpl(int size) {

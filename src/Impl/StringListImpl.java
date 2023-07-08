@@ -14,7 +14,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public String add(String item) {
-        for (int i = 0; i < size-1; i++) {
+        for (int i = 0; i < size; i++) {
             if (m[i] == null) {
                 m[i] = item;
                 break;

@@ -1,5 +1,6 @@
 package Homework2_13.Impl;
 
+import Homework2_13.Exception.ElementNotFoundException;
 import Homework2_13.Exception.InvalidIndexException;
 import Homework2_13.Exception.NullItemException;
 import Homework2_13.Exception.StorageIsFullException;
@@ -22,31 +23,50 @@ public class StringListImpl implements StringList {
 
     @Override
     public String add(String item) {
-        for (int i = 0; i < size; i++) {
-            if (m[i] == null) {
-                m[i] = item;
-                break;
-            }
-        }
+        validateSize();
+        validateItem(item);
+        m[size++] = item;
         return item;
     }
 
     @Override
     public String add(int index, String item) {
-//        for (int i = 0; i < size; i++) {
-//
-//        }
+        validateSize();
+        validateItem(item);
+        validateIndex(index);
+
+        if (index == size) {
+            m[size++] = item;
+            return item;
+        }
+
+        System.arraycopy(m,index,m,index+1,size-index);
+        m[index] = item;
+        size++;
+
         return item;
     }
 
     @Override
     public String set(int index, String item) {
-        return null;
+        validateIndex(index);
+        validateItem(item);
+        m[index] = item;
+        return item;
     }
 
     @Override
     public String remove(String item) {
-        return null;
+        validateItem(item);
+
+        int index = indexOf(item);
+
+        if (index == -1) {
+            throw new ElementNotFoundException();
+        }
+
+        size--;
+        return item;
     }
 
     @Override
@@ -56,7 +76,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public boolean contains(String item) {
-        return indexOf(item) !=-1;
+        return indexOf(item) >-1;
     }
 
     @Override
@@ -84,7 +104,7 @@ public class StringListImpl implements StringList {
     @Override
     public String get(int index) {
         validateIndex(index);
-        return null;
+        return m[index];
     }
 
     @Override

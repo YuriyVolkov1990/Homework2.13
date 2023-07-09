@@ -1,4 +1,4 @@
-package Interface;
+package Homework2_13.Interface;
 
 public interface StringList {
     // Добавление элемента.

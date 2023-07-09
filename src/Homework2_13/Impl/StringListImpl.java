@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class StringListImpl implements StringList {
     private int size;
-    private static String[] m;
+    private final String[] m;
 
     public StringListImpl() {
         m = new String[10];
@@ -43,7 +43,6 @@ public class StringListImpl implements StringList {
         System.arraycopy(m,index,m,index+1,size-index);
         m[index] = item;
         size++;
-
         return item;
     }
 
@@ -61,17 +60,21 @@ public class StringListImpl implements StringList {
 
         int index = indexOf(item);
 
-        if (index == -1) {
-            throw new ElementNotFoundException();
-        }
-
-        size--;
-        return item;
+        return remove(index);
     }
 
     @Override
     public String remove(int index) {
-        return null;
+        validateIndex(index);
+
+        String item = m[index];
+
+        if (index != size) {
+            System.arraycopy(m,index+1,m,index, size-index);
+        }
+
+        size--;
+        return item;
     }
 
     @Override
